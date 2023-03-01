@@ -1,0 +1,71 @@
+@media only screen and (max-width: 768px) {
+  .note{
+    color: black;
+  }
+}
+@media only screen and (min-width: 768px) {
+  td:not(.answer){
+    width: 120px;
+  }
+  tr{
+    height: 20px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #largeBox{
+    width: 900px;
+    padding: 10px;
+    border: 2px solid black;
+  }
+}
+.grid{
+  border: 1px solid black;
+}
+.blank{
+  background-color:silver;
+}
+* {
+  box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11pt;
+}
+th, h1, h2{
+  font-family: 'Roboto', sans-serif;
+}
+th{
+  font-size: 14pt;
+}
+h1{
+  font-size: 27px;
+  margin-top:10px;
+}
+input{
+  border: none;
+  width: 100%;
+  height: 100%;
+  
+}
+#largeBox{
+  text-align: left;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.sidebar{
+  flex-grow: 2;
+}
+
+[type=checkbox]{
+  width: 10px;
+  height: 10px;
+  border: 2px solid black;
+}
+.note{
+  margin-top: -10px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Verb Synopsis Helper!</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap" rel="stylesheet">
+	<link href="master_style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	<div id="largeBox">
+    <div id="titlebox">
+		<h1>Verb Synopsis</h1>
+		<h2 class="note" id="subheading"> by Georgia Green</h2>
+    </div>
+    
+      <button onclick="getRandom()">Randomize</button>
+      <br>
+	    <input type="checkbox" id="verbBox" name="randomVerb" value="randomVerb">
+    	<label for="randomVerb">Verb</label><br>
+    	<input type="checkbox" id="personBox" name="randomPerson" value="randomPerson">
+    	<label for="randomPerson">Person</label><br>
+    	<input type="checkbox" id="numberBox" name="randomNumber" value="randomNumber">
+    	<label for="randomNumber">Number</label><br> <br>
+			<select class = "ddown" id = "verbSelect" name = "verbSelect" onreadystatechange="UpdateForm()" onchange="UpdateForm()">
+	    </select>
+    <select class = "ddown" id = "person" name = "person">
+      <option value = "firstPerson"> 1st Person </option>
+      <option value = "secondPerson"> 2nd Person </option>
+      <option value = "thirdPerson"> 3rd Person </option>
+    </select>
+    <select class = "ddown" id = "number" name = "number">
+      <option value = "singular"> Singular </option>
+      <option value = "plural"> Plural </option>
+    </select>
+    <button onclick = "CheckAnswer()" id="boop">check answers</button>
+    <button onclick = "ResetVals()" id="reset">reset</button>
+    <p id = "numCorrect"></p>
+    <div id = "bigBox">
+    <table id = "indicativeActive">
+      <tr>
+        <th>Indicative</th>
+      </tr>
+      <tr>
+        <td/>
+        <td>Active:</td>
+        <td class="answer"/>
+        <td>Passive:</td>
+      </tr>
+      <tr>
+        <td>Present:</td>
+        <td class="grid"><input autocomplete="off" id="inPresent"></td>
+        <td id="inPresentAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inPassivePresent"></td>
+        <td id="inPassivePresentAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Imperfect:</td>
+        <td class="grid"><input autocomplete="off" id="inImperfect"></td>
+        <td id="inImperfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inPassiveImperfect"></td>
+        <td id="inPassiveImperfectAnswer" class="answer"></td>
+      </tr>
+          <tr>
+        <td>Perfect:</td>
+        <td class="grid"><input autocomplete="off" id="inPerfect"></td>
+        <td id="inPerfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inPassivePerfect"></td>
+        <td id="inPassivePerfectAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Pluperfect:</td>
+        <td class="grid"><input autocomplete="off" id="inPluperfect"></td>
+        <td id="inPluperfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inPassivePluperfect"></td>
+        <td id="inPassivePluperfectAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Future Present:</td>
+        <td class="grid"><input autocomplete="off" id="inFuturePresent"></td>
+        <td id="inFuturePresentAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inFuturePassivePresent"></td>
+        <td id="inFuturePassivePresentAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Future Perfect:</td>
+        <td class="grid"><input autocomplete="off" id="inFuturePerfect"></td>
+        <td id="inFuturePerfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="inFuturePassivePerfect"></td>
+        <td id="inFuturePassivePerfectAnswer" class="answer"></td>
+      </tr>
+    </table> <br>
+    <table id = "subActive">
+      <tr>
+        <th>Subjunctive</th>
+      </tr>
+      <tr>
+        <td/>
+        <td>Active:</td>
+        <td class = "answer"/>
+        <td>Passive:</td>
+      </tr>
+      <tr>
+        <td>Imperfect:</td>
+        <td class="grid"><input autocomplete="off" id="subImperfect"></td>
+        <td id="subImperfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="subPassiveImperfect"></td>
+        <td id="subPassiveImperfectAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Pluperfect:</td>
+        <td class="grid"><input autocomplete="off" id="subPluperfect"></td>
+        <td id="subPluperfectAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="subPassivePluperfect"></td>
+        <td id="subPassivePluperfectAnswer" class="answer"></td>
+      </tr>
+    </table> <br>
+    <table id = "imperative">
+      <tr>
+        <th>Imperative</th>
+      </tr>
+      <tr>
+        <td/>
+        <td>Singular:</td>
+        <td class="answer"/>
+        <td>Plural:</td>
+      </tr>
+      <tr>
+        <td>Positive:</td>
+        <td class="grid"><input autocomplete="off" id="impPositive"></td>
+        <td id="impPositiveAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="impNegative"></td>
+        <td id="impNegativeAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Negative:</td>
+        <td class="grid"><input autocomplete="off" id="impPositivePlural"></td>
+        <td id="impPositivePluralAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="impNegativePlural"></td>
+        <td id="impNegativePluralAnswer" class="answer"></td>
+    </table> <br>
+    <table id = "activeParticiple">
+      <tr>
+        <th>Participle</th>
+      </tr>
+      <tr>
+        <td/>
+        <td>Active:</td>
+        <td class="answer"/>
+        <td>Passive:</td>
+      </tr>
+      <tr>
+        <td>Present:</td>
+        <td class="grid"><input autocomplete="off" id="presentActiveParticiple"></td>
+        <td id="presentActiveParticipleAnswer" class="answer"></td>
+        <!--present passive-->
+        <td class="grid" class="blank"><input autocomplete="off" id="presentPassiveParticiple" class="blank" disabled></td>
+        <td id="presentPassiveParticipleAnswer" class="answer"></td>
+      </tr>
+      <tr>
+        <td>Perfect:</td>
+        <!--perfect active-->
+        <td class="grid" class="blank"><input autocomplete="off" id="perfectActiveParticiple" class="blank" disabled></td>
+        <td id="perfectActiveParticipleAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="perfectPassiveParticiple"></td>
+        <td id="perfectPassiveParticipleAnswer" class="answer"></td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+        <td>Future:</td>
+        <!--future active-->
+        <td class="grid"><input autocomplete="off" id="futureActiveParticiple"></td>
+        <td id="futureActiveParticipleAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="futurePassiveParticiple"></td>
+        <td id="futurePassiveParticipleAnswer" class="answer"></td>
+      </tr>
+    </table> <br>
+    <table id = "infinitive">
+      <tr>
+      <th>Infinitive</th>
+      </tr>
+      <tr>
+        <td/>
+        <td>Active:</td>
+        <td class="answer"/>
+        <td>Passive:</td>
+      </tr>
+      <tr>
+        <td>Present:</td>
+        <td class="grid"><input autocomplete="off" id="presentActiveInfinitive"></td>
+        <td id = "presentActiveInfinitiveAnswer" class="answer"></td>
+        <td class="grid"><input autocomplete="off" id="presentPassiveInfinitive"></td>
+        <td id = "presentPassiveInfinitiveAnswer" class="answer"></td>
+      </tr>
+    </table>
+    <br>
+    <h2 class="note">If you think about something else I could make/add that might be helpful, or something that I need to fix, shoot me an email at <a href="mailto:25greeng@brearley.org?&subject=Latin%20Verb%20Synopsis%20Practice%20Feedback%20（＾∇＾）" target="_blank">25greeng@brearley.org</a>. <br>(^ . ^) -Georgia</h2>
+    </div>
+      <script src="verb_synopsis.js"></script>
+  </div>
+  <div id="sidebar2" class="sidebar"></div>
+</body>
+</html>
