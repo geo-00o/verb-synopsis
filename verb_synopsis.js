@@ -100,7 +100,7 @@ class Verb {
             presentVowels = ["","a"];
             imperfectVowel = "a";
             fakeInfinitive += "e";
-            var futurePresentEndings = ["bo","bi","bi","bi","bi","bu"]
+            var futurePresentEndings = ["abo","abi","abi","abi","abi","abu"]
             break;
           case "2":
             presentVowels = "";
@@ -168,7 +168,7 @@ class Verb {
 
         const inPluperfect = eachCombine(6, this.pp3.slice(0,-1),  "era", subImperfectEndings)
 
-        const inFuturePresent = eachCombine(6, this.pp1.slice(0,-1), imperfectVowel, futurePresentEndings, inPresentEndings)
+        const inFuturePresent = eachCombine(6, this.pp1.slice(0,-1), futurePresentEndings, inPresentEndings)
 
         const inFuturePerfect = eachCombine(this.pp3.slice(0,-1), futurePerfectEndings)
 
@@ -236,12 +236,14 @@ function ResetVals() {
 function ToBlank() {
   for (var i = 0; i < arguments.length; i++){
     document.getElementById(arguments[i]).className = "blank";
+    document.getElementById(arguments[i]).disabled = true;
     document.getElementById(arguments[i]).value = "";
   }
 }
 function ToUnBlank() {
   for (var i = 0; i < arguments.length; i++){
     document.getElementById(arguments[i]).classList.remove("blank");
+    document.getElementById(arguments[i]).disabled = false;
     document.getElementById(arguments[i]).value = "";
   }
 }
@@ -253,7 +255,7 @@ function UpdateForm() {
   }
   else {
     ToBlank("inFuturePassivePresent", "inFuturePassivePerfect", "perfectActiveParticiple");
-    ToUnBlank("inPassivePresent", "inPassiveImperfect", "inPassivePerfect", "inPassivePluperfect", "futurePassiveParticiple","presentPassiveInfinitive");
+    ToUnBlank("inPassivePresent", "inPassiveImperfect", "inPassivePerfect", "inPassivePluperfect", "inFuturePresent", "inFuturePerfect", "futurePassiveParticiple","presentPassiveInfinitive", "impPositive", "impNegative", "impPositivePlural", "impNegativePlural", "perfectPassiveParticiple", "subPassiveImperfect", "subPassivePluperfect");
   }
 }
 window.onload = UpdateForm;
@@ -349,26 +351,25 @@ for (i = 0; i < verbs.length; i++) {
   verbSelect.appendChild(newVerb);
 }
 
-//randomizes the verb, person, or number depending on the parameters
-function random(verbR, personR, numberR) {
-  if (verbR === true) {
+//checks whether checkboxes (html) are checked and randomizes if they are
+function getRandom() {
+  if (document.getElementById("verbBox").checked == true) {
     verbNum = Math.floor(Math.random() * verbs.length);
     console.log(verbNum);
     document.getElementById("verbSelect").options.selectedIndex = verbNum;
   }
-  if (personR === true) {
+  if (document.getElementById("personBox").checked == true) {
     personNum = Math.floor(Math.random() * 3);
     console.log(personNum);
     document.getElementById("person").options.selectedIndex = personNum;
   }
-  if (numberR === true) {
+  if (document.getElementById("numberBox").checked == true) {
     numberNum = Math.floor(Math.random() * 2);
     console.log(numberNum);
     document.getElementById("number").options.selectedIndex = numberNum;
   }
 }
 
-//checks whether checkboxes (html) are checked and randomizes if they are
 
 /*lass Theme {
   constructor(name, bgColor, buttonColor, inputColor, borderColor, inputTextColor, textColor, )
