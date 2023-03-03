@@ -95,18 +95,21 @@ class Verb {
     var fakeInfinitive = this.pp2.slice(0,-1)
     const futurePerfectEndings = ["ero", "eris", "erit", "erimus", "eritis", "erint"]
     var futurePresentEndings;
+    var passiveFuturePresentEndings;
     switch (this.conj) {
         case "1":
           presentVowels = ["","a"];
           imperfectVowel = "a";
           fakeInfinitive += "e";
-          futurePresentEndings = ["abo","abi","abi","abi","abi","abu"]
+          futurePresentEndings = ["abo","abi","abi","abi","abi","abu"];
+          passiveFuturePresentEndings = ["abor","aberis","abitur","abimur","abimini","abuntur"];
           break;
         case "2":
           presentVowels = "";
           imperfectVowel = "";
           fakeInfinitive += "e";
           futurePresentEndings = ["bo","bi","bi","bi","bi","bu"]
+          passiveFuturePresentEndings = ["bor","beris","bitur","bimur","bimini","buntur"]
           break;
         case "3":
           presentVowels = ["","i","i","i","i","u"];
@@ -114,6 +117,7 @@ class Verb {
           passiveInfinitiveStem = "i";
           fakeInfinitive += "ere";
           futurePresentEndings = ["am","e"]
+          passiveFuturePresentEndings = ["ar","eris","itur","imur","imini","untur"]
           break;
         case "3io":
           presentVowels = ["","","","","","u"];
@@ -121,12 +125,14 @@ class Verb {
           passiveInfinitiveStem = "i";
           fakeInfinitive += "ere";
           futurePresentEndings = ["am","e"]
+          passiveFuturePresentEndings = ["ar","eris","itur","imur","imini","untur"]
           break;
         case "4":
           presentVowels = ["","","","","","u"];
           imperfectVowel = "e";
           fakeInfinitive += "e";
           futurePresentEndings = ["am","e"]
+          passiveFuturePresentEndings = ["ar","eris","itur","imur","imini","untur"]
           break;
     }
     if (this.dep == true) {
@@ -139,13 +145,17 @@ class Verb {
 
       const pluperfect = eachCombine(6, this.pp3.slice(0,-2), fourthPPplural, " era", subImperfectEndings);
 
-      //const futurePresent = 
+      const futurePresent = eachCombine(6, this.pp1.slice(0,-2), passiveFuturePresentEndings);
 
-      //const futurePerfect = 
+      const futurePerfect = eachCombine(6, this.pp3.slice(0,-2), fourthPPplural, " ", futurePerfectEndings);
 
+      //const subPresent
+      
       const subImperfect = eachCombine(fakeInfinitive, subImperfectEndings)
 
-      const subPluperfect = eachCombine(this.pp3.slice(0, -2),  fourthPPplural, " esse", subImperfectEndings)
+      //const subPerfect
+
+      const subPluperfect = eachCombine(6, this.pp3.slice(0, -2),  fourthPPplural, " esse", subImperfectEndings)
 
       const presentActiveParticiple = this.pp1.slice(0,-2) + imperfectVowel + "ns, -" + (this.pp1.slice(0,-2) + imperfectVowel).slice(-1) + "ntis";
 
@@ -158,15 +168,10 @@ class Verb {
       const presentActiveInfinitive = this.pp2;
 
       //sets and returns the fully conjugated verb
-      var conjugations = [present[form], imperfect[form], perfect[form], pluperfect[form], "", "", "", "", "", "", "", "", subImperfect[form], subPluperfect[form], "", "", /*impPositive*/"", /*impPositivePlural*/"", /*impNegative*/"", /*impNegativePlural*/"", presentActiveParticiple, perfectActiveParticiple,"", futureActiveParticiple,"", presentActiveInfinitive, ""];
+      var conjugations = [present[form], imperfect[form], perfect[form], pluperfect[form], futurePresent[form], futurePerfect[form], "", "", "", "", "", "", ""/*subPresent[form]*/, subImperfect[form], ""/*subPerfect[form]*/, subPluperfect[form], "", "", /*impPositive*/"", /*impPositivePlural*/"", /*impNegative*/"", /*impNegativePlural*/"", presentActiveParticiple, perfectActiveParticiple,"", futureActiveParticiple,"", presentActiveInfinitive, ""];
 
 
 
-    } else if (this.irr = true) {
-      //irregular conjugations
-
-
-      
     } else {
       const present = eachCombine(6,[this.pp1, this.pp1.slice(0,-1)], presentVowels, presentEndings);
 
@@ -178,25 +183,35 @@ class Verb {
 
       const futurePresent = eachCombine(6, this.pp1.slice(0,-1), futurePresentEndings, presentEndings);
 
-      const futurePerfect = eachCombine(this.pp3.slice(0,-1), futurePerfectEndings);
+      const futurePerfect = eachCombine(6,this.pp3.slice(0,-1), futurePerfectEndings);
 
       const passivePresent = eachCombine(6,[this.pp1, this.pp1.slice(0,-1)], presentVowels, passivePresentEndings);
 
       const passiveImperfect = eachCombine(6, this.pp1.slice(0,-1), imperfectVowel, "ba", passivePresentEndings);
 
-      const passivePerfect = eachCombine(this.pp4.slice(0,-2), fourthPPplural, " ", passivePerfectEndings);
+      const passivePerfect = eachCombine(6, this.pp4.slice(0,-2), fourthPPplural, " ", passivePerfectEndings);
 
-      const passivePluperfect = eachCombine(this.pp4.slice(0,-2), fourthPPplural, " era", subImperfectEndings);
+      const passivePluperfect = eachCombine(6, this.pp4.slice(0,-2), fourthPPplural, " era", subImperfectEndings);
 
-      const passiveFuturePresent = eachCombine(6, this.pp1.slice(0,-1), futurePresentEndings, presentEndings);
+      const passiveFuturePresent = eachCombine(6, this.pp1.slice(0,-1), passiveFuturePresentEndings);
 
-      const subImperfect = eachCombine(this.pp2, subImperfectEndings);
+      const passiveFuturePerfect = eachCombine(6, this.pp4.slice(0,-2), fourthPPplural, " ", futurePerfectEndings);
 
-      const subPluperfect = eachCombine(this.pp3, "sse", subImperfectEndings);
+      // const subPresent =
 
-      const subPassiveImperfect = eachCombine(this.pp2, passivePresentEndings);
+      const subImperfect = eachCombine(6, this.pp2, subImperfectEndings);
 
-      const subPassivePluperfect = eachCombine(this.pp4.slice(0,-2), fourthPPplural, " esse", subImperfectEndings);
+      // const subPerfect
+
+      const subPluperfect = eachCombine(6, this.pp3, "sse", subImperfectEndings);
+
+      // const subPassivePresent = 
+
+      const subPassiveImperfect = eachCombine(6, this.pp2, passivePresentEndings);
+
+      // const subPassivePerfect = 
+
+      const subPassivePluperfect = eachCombine(6, this.pp4.slice(0,-2), fourthPPplural, " esse", subImperfectEndings);
 
       const impPositive = this.pp2.slice(0, -2);
 
@@ -212,7 +227,7 @@ class Verb {
 
       const perfectPassiveParticiple = this.pp4 + ", -a, -um";
       
-      const futurePassiveParticiple = this.pp4.slice(0,-2) + "urus, -a, -um";
+      const passiveFutureParticiple = this.pp4.slice(0,-2) + "urus, -a, -um";
 
       const futureActiveParticiple = this.pp1.slice(0,-1) + imperfectVowel + "ndus, -a, -um";
 
@@ -221,16 +236,18 @@ class Verb {
       const presentPassiveInfinitive = this.pp2.slice(0,-3) + passiveInfinitiveStem;
 
       //sets and returns the fully conjugated verb
-      var conjugations = [present[form], imperfect[form], perfect[form], pluperfect[form], futurePresent[form], futurePerfect[form], passivePresent[form], passiveImperfect[form], passivePerfect[form], passivePluperfect[form],"","", subImperfect[form], subPluperfect[form],subPassiveImperfect[form], subPassivePluperfect[form], impPositive,impPositivePlural, impNegative, impNegativePlural, presentActiveParticiple,perfectActiveParticiple, perfectPassiveParticiple, futurePassiveParticiple, futureActiveParticiple, presentActiveInfinitive, presentPassiveInfinitive];
+      var conjugations = [present[form], imperfect[form], perfect[form], pluperfect[form], futurePresent[form], futurePerfect[form], passivePresent[form], passiveImperfect[form], passivePerfect[form], passivePluperfect[form], passiveFuturePresent[form], passiveFuturePerfect[form], ""/*subPresent[form]*/, subImperfect[form], ""/*subPerfect[form]*/, subPluperfect[form], ""/*subPassivePresent[form]*/, subPassiveImperfect[form], ""/*subPassivePerfect[form]*/, subPassivePluperfect[form], impPositive,impPositivePlural, impNegative, impNegativePlural, presentActiveParticiple,perfectActiveParticiple, perfectPassiveParticiple, passiveFutureParticiple, futureActiveParticiple, presentActiveInfinitive, presentPassiveInfinitive];
+      console.log(passiveFuturePerfect);
     }
     return conjugations;
   }
 }
 
 //all the text box inputs from the html
-const inputs = [document.getElementById("present"), document.getElementById("imperfect"), document.getElementById("perfect"), document.getElementById("pluperfect"), document.getElementById("futurePresent"), document.getElementById("futurePerfect"), document.getElementById("passivePresent"), document.getElementById("passiveImperfect"), document.getElementById("passivePerfect"), document.getElementById("passivePluperfect"), ""/*document.getElementById("futurePassivePresent")*/, ""/*document.getElementById("futurePassivePerfect")*/, document.getElementById("subImperfect"), document.getElementById("subPluperfect"), document.getElementById("subPassiveImperfect"), document.getElementById("subPassivePluperfect"), document.getElementById("impPositive"), document.getElementById("impNegative"), document.getElementById("impPositivePlural"), document.getElementById("impNegativePlural"), document.getElementById("presentActiveParticiple"),document.getElementById("perfectActiveParticiple"), document.getElementById("perfectPassiveParticiple"), document.getElementById("futureActiveParticiple"), document.getElementById("futurePassiveParticiple"), document.getElementById("presentActiveInfinitive"), document.getElementById("presentPassiveInfinitive")];
+const inputs = [document.getElementById("present"), document.getElementById("imperfect"), document.getElementById("perfect"), document.getElementById("pluperfect"), document.getElementById("futurePresent"), document.getElementById("futurePerfect"), document.getElementById("passivePresent"), document.getElementById("passiveImperfect"), document.getElementById("passivePerfect"), document.getElementById("passivePluperfect"), document.getElementById("passiveFuturePresent"), document.getElementById("passiveFuturePerfect"), document.getElementById("subPresent"), document.getElementById("subImperfect"), document.getElementById("subPerfect"), document.getElementById("subPluperfect"), document.getElementById("subPassivePresent"), document.getElementById("subPassiveImperfect"), document.getElementById("subPassivePerfect"), document.getElementById("subPassivePluperfect"), document.getElementById("impPositive"), document.getElementById("impNegative"), document.getElementById("impPositivePlural"), document.getElementById("impNegativePlural"), document.getElementById("presentActiveParticiple"),document.getElementById("perfectActiveParticiple"), document.getElementById("perfectPassiveParticiple"), document.getElementById("futureActiveParticiple"), document.getElementById("passiveFutureParticiple"), document.getElementById("presentActiveInfinitive"), document.getElementById("presentPassiveInfinitive")];
 //all the currently invisible outputs (answers) from the html
-const outputs = [document.getElementById("presentAnswer"), document.getElementById("imperfectAnswer"), document.getElementById("PerfectAnswer"), document.getElementById("pluperfectAnswer"), document.getElementById("futurePresentAnswer"), document.getElementById("futurePerfectAnswer"), document.getElementById("passivePresentAnswer"), document.getElementById("passiveImperfectAnswer"), document.getElementById("passivePerfectAnswer"), document.getElementById("passivePluperfectAnswer"), ""/*document.getElementById("futurePassivePresentAnswer")*/, ""/*document.getElementById("futurePassivePerfectAnswer")*/, document.getElementById("subImperfectAnswer"), document.getElementById("subPluperfectAnswer"), document.getElementById("subPassiveImperfectAnswer"), document.getElementById("subPassivePluperfectAnswer"), document.getElementById("impPositiveAnswer"), document.getElementById("impNegativeAnswer"), document.getElementById("impPositivePluralAnswer"), document.getElementById("impNegativePluralAnswer"), document.getElementById("presentActiveParticipleAnswer"), document.getElementById("perfectActiveParticipleAnswer"), document.getElementById("perfectPassiveParticipleAnswer"), document.getElementById("futureActiveParticipleAnswer"), document.getElementById("futurePassiveParticipleAnswer"), document.getElementById("presentActiveInfinitiveAnswer"), document.getElementById("presentPassiveInfinitiveAnswer")];
+const outputs = [document.getElementById("presentAnswer"), document.getElementById("imperfectAnswer"), document.getElementById("perfectAnswer"), document.getElementById("pluperfectAnswer"), document.getElementById("futurePresentAnswer"), document.getElementById("futurePerfectAnswer"), document.getElementById("passivePresentAnswer"), document.getElementById("passiveImperfectAnswer"), document.getElementById("passivePerfectAnswer"), document.getElementById("passivePluperfectAnswer"), document.getElementById("passiveFuturePresentAnswer"), document.getElementById("passiveFuturePerfectAnswer"), document.getElementById("subPresentAnswer"), document.getElementById("subImperfectAnswer"), document.getElementById("subPerfectAnswer"), document.getElementById("subPluperfectAnswer"), document.getElementById("subPassivePresentAnswer"), 
+document.getElementById("subPassiveImperfectAnswer"), document.getElementById("subPassivePerfectAnswer"), document.getElementById("subPassivePluperfectAnswer"), document.getElementById("impPositiveAnswer"), document.getElementById("impNegativeAnswer"), document.getElementById("impPositivePluralAnswer"), document.getElementById("impNegativePluralAnswer"), document.getElementById("presentActiveParticipleAnswer"), document.getElementById("perfectActiveParticipleAnswer"), document.getElementById("perfectPassiveParticipleAnswer"), document.getElementById("futureActiveParticipleAnswer"), document.getElementById("passiveFutureParticipleAnswer"), document.getElementById("presentActiveInfinitiveAnswer"), document.getElementById("presentPassiveInfinitiveAnswer")];
 
 //resets the inputs, makes the outputs invisible again
 function ResetVals() {
@@ -259,13 +276,11 @@ function ToUnBlank() {
 
 function UpdateForm() {
   if (verbs[verbSelect.value].dep == true) {
-    ToBlank("passivePresent", "passiveImperfect", "passivePerfect", "passivePluperfect", "subPassiveImperfect", "subPassivePluperfect", "futurePresent", "futurePerfect", "impPositive", "impNegative", "impPositivePlural", "impNegativePlural", "perfectPassiveParticiple","futurePassiveParticiple","presentPassiveInfinitive");
+    ToBlank("passivePresent", "passiveImperfect", "passivePerfect", "passivePluperfect", "subPassivePresent", "subPassiveImperfect", "subPassivePerfect", "subPassivePluperfect", "passiveFuturePresent", "passiveFuturePerfect", "impPositive", "impNegative", "impPositivePlural", "impNegativePlural", "perfectPassiveParticiple","passiveFutureParticiple","presentPassiveInfinitive");
     ToUnBlank("perfectActiveParticiple")
-  } else if (verbs[verbSelect.value].dep == true){
-    //something happens here
   } else {
-    ToBlank("futurePassivePresent", "futurePassivePerfect", "perfectActiveParticiple");
-    ToUnBlank("passivePresent", "passiveImperfect", "passivePerfect", "passivePluperfect", "futurePresent", "futurePerfect", "futurePassiveParticiple","presentPassiveInfinitive", "impPositive", "impNegative", "impPositivePlural", "impNegativePlural", "perfectPassiveParticiple", "subPassiveImperfect", "subPassivePluperfect");
+    ToBlank("perfectActiveParticiple");
+    ToUnBlank("passivePresent", "passiveImperfect", "passivePerfect", "passivePluperfect", "futurePresent", "futurePerfect", "passiveFuturePresent", "passiveFuturePerfect", "subPassivePresent", "subPassiveImperfect", "subPassivePerfect", "subPassivePluperfect", "passiveFutureParticiple","presentPassiveInfinitive", "impPositive", "impNegative", "impPositivePlural", "impNegativePlural", "perfectPassiveParticiple");
   }
 }
 window.onload = UpdateForm;
@@ -335,8 +350,8 @@ verbs[26] = new Verb("volvo", "volvere", "volvi", "volutus", false, false, "3")
 verbs[27] = new Verb("conor", "conari", "conatus", " ", false, true, "1")
 verbs[28] = new Verb("ingredior", "ingredi", "ingressus", " ", false, true, "3io")
 //some irregulars
-verbs[29] = new Verb("sum", "esse", "fui", " ", true, false)
-console.log(verbs[29].conjugate(1))
+//verbs[29] = new Verb("sum", "esse", "fui", " ", true, false)
+//console.log(verbs[29].conjugate(1))
 //alphabetizes the verbs
 verbs.sort(function (a, b) {
   let x = a.pp1.toLowerCase();
@@ -357,7 +372,7 @@ for (i = 0; i < verbs.length; i++) {
   if (verbs[i].irr == true) {
     isIrr = "**IRREGULAR**";
   };
-  verbText = document.createTextNode((i + 1).toString() + ". " + verbs[i].pp1 + ", " + verbs[i].pp2 + ", " + verbs[i].pp3 + ", " + verbs[i].pp4 + isDep + isIrr);
+  verbText = document.createTextNode(/*(i + 1).toString() + ". "+*/ verbs[i].pp1 + ", " + verbs[i].pp2 + ", " + verbs[i].pp3 + ", " + verbs[i].pp4 + isDep + isIrr);
   newVerb.appendChild(verbText);
   newVerb.value = i;
   verbSelect.appendChild(newVerb);

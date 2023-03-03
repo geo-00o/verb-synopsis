@@ -1,16 +1,16 @@
-@media only screen and (max-width: 768px) {
+/*@media only screen and (max-width: 768px) {
   .note{
     color: black;
   }
-}
-@media only screen and (min-width: 768px) {
+}*/
+/*@media only screen and (min-width: 768px) {
   td:not(.answer){
     width: 120px;
   }
   tr{
     height: 20px;
   }
-}
+}*/
 
 @media only screen and (min-width: 900px) {
   #largeBox{
