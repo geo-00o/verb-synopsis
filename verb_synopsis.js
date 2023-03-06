@@ -78,6 +78,15 @@ class Verb {
   }
   //conjugates the verb to check answers
   conjugate(form) {
+    if (this.irr == true) {
+      var prefixes;
+      switch (this.conj) {
+        case "sum": {
+          prefixes = [this.pp1.slice(0,-3), this.pp2.slice(0,-4), this.pp3.slice(0,-3), this.pp3.slice(0,-7)];
+          
+        }
+      }
+    } else{
     //form -- 0: 1p sing, 1: 2p sing, 2: 3p sing, 3: 1p plur, 4: 2p plur, 5: 3p plur
     const presentEndings = ["","s", "t", "mus", "tis", "nt"];
     const perfectEndings = ["i","isti", "it", "imus", "istis", "erunt"];
@@ -244,6 +253,7 @@ class Verb {
       //sets and returns the fully conjugated verb
       var conjugations = [present[form], imperfect[form], perfect[form], pluperfect[form], futurePresent[form], futurePerfect[form], passivePresent[form], passiveImperfect[form], passivePerfect[form], passivePluperfect[form], passiveFuturePresent[form], passiveFuturePerfect[form], subPresent[form], subImperfect[form], subPerfect[form], subPluperfect[form], subPassivePresent[form], subPassiveImperfect[form], subPassivePerfect[form], subPassivePluperfect[form], impPositive,impPositivePlural, impNegative, impNegativePlural, presentActiveParticiple,perfectActiveParticiple, perfectPassiveParticiple, passiveFutureParticiple, futureActiveParticiple, presentActiveInfinitive, presentPassiveInfinitive];
       console.log(passiveFuturePerfect);
+    }
     }
     return conjugations;
   }
